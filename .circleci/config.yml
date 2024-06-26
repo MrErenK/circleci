@@ -9,4 +9,4 @@ jobs:
     machine: true
     resource_class: mrerenk/aosp
     steps:
-      - run: echo "Hi I'm on Runners! (Docker)"
+      - run: apt update -yqq && apt install -y python3-pip
