@@ -22,9 +22,14 @@ jobs:
             git config --global user.email "$CIRCLE_USERNAME@users.noreply.github.com"
 
       - run:
+          name: Clone the repository
+          command: |
+            git clone $CIRCLE_REPOSITORY_URL $CIRCLE_PROJECT_REPONAME
+
+      - run:
           name: Export variables and start the build
           command: |
-            cd $CIRCLE_WORKING_DIRECTORY
+            cd $CIRCLE_PROJECT_REPONAME
             ls -la
             export should_skip_sync="0"
             export clean_out="0"
