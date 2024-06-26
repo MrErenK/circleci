@@ -21,16 +21,7 @@ jobs:
             bsdmainutils lz4 aria2 rclone ssh-client libncurses5 libssl-dev rsync schedtool python-is-python3 libarchive-tools python3
 
       - run:
-          name: Setup ccache
+          name: Verify and update ccache size
           command: |
-            cd $CIRCLE_WORKING_DIRECTORY
-            mkdir ccache
-            sudo mkdir /mnt/ccache
-            sudo mount --bind $CIRCLE_WORKING_DIRECTORY/ccache /mnt/ccache
-            echo 'export USE_CCACHE=1' >> $BASH_ENV
-            echo 'export CCACHE_DIR=/mnt/ccache' >> $BASH_ENV
-            echo 'export CCACHE_EXEC=$(which ccache)' >> $BASH_ENV
-            source $BASH_ENV
-            ccache -o compression=true
-            ccache -M 20G
-            ccache -z
+            ls /mnt/ccache
+            ccache -M 75G
