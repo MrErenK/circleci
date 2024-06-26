@@ -24,8 +24,9 @@ jobs:
       - run:
           name: Clone the repository
           command: |
-            echo $CIRCLE_REPOSITORY_URL
-            git clone $CIRCLE_REPOSITORY_URL $CIRCLE_PROJECT_REPONAME
+            git clone $REPO_URL $CIRCLE_PROJECT_REPONAME
+          environment:
+            REPO_URL: https://github.com/MrErenK/circleci/
 
       - run:
           name: Export variables and start the build
