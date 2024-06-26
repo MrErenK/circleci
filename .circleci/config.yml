@@ -12,7 +12,8 @@ jobs:
       - run:
           name: Update packages
           command: |
-            sudo DEBIAN_FRONTEND=noninteractive apt-get update -y 
+            sudo DEBIAN_FRONTEND=noninteractive apt-get update -yqq
+            sudo DEBIAN_FRONTEND=noninteractive apt-get upgrade -yqq
 
       - run:
           name: Verify and update ccache size
@@ -27,13 +28,7 @@ jobs:
             git config --global user.email "$CIRCLE_USERNAME@users.noreply.github.com"
 
       - run:
-          name: Create or cd into the working directory
-          command: |
-            cd $CIRCLE_WORKING_DIRECTORY
-            mkdir -p rom
-            cd rom
-
-      - run:
           name: Start the build
           command: |
+            cd $CIRCLE_WORKING_DIRECTORY
             bash build.sh
