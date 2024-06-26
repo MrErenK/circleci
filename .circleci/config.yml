@@ -29,6 +29,13 @@ jobs:
             REPO_URL: https://github.com/MrErenK/circleci/
 
       - run:
+          name: Setup repo and build environment
+          command: |
+            wget https://storage.googleapis.com/git-repo-downloads/repo
+            chmod a+x repo
+            sudo install repo /usr/bin/repo
+
+      - run:
           name: Export variables and start the build
           command: |
             cd $CIRCLE_PROJECT_REPONAME
