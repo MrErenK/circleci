@@ -9,4 +9,4 @@ jobs:
     machine: true
     resource_class: mrerenk/aosp
     steps:
-      - run: apt update -yqq && apt install -y python3-pip
+      - run: sudo apt update -yqq && sudo apt install -y python3-pip
