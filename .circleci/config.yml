@@ -16,12 +16,6 @@ jobs:
             sudo DEBIAN_FRONTEND=noninteractive apt-get upgrade -yqq
 
       - run:
-          name: Verify and update ccache size
-          command: |
-            ls /mnt/ccache
-            ccache -M 75G
-
-      - run:
           name: Update git credentials
           command: |
             git config --global user.name "$CIRCLE_USERNAME"
@@ -31,6 +25,7 @@ jobs:
           name: Export variables and start the build
           command: |
             cd $CIRCLE_WORKING_DIRECTORY
+            ls -la
             export should_skip_sync="0"
             export clean_out="0"
             export should_update_trees="0"

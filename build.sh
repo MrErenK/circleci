@@ -196,6 +196,20 @@ if [ "${TELEGRAM_TOKEN}" != "" ] && [ "${TELEGRAM_CHAT}" != "" ]; then
     send_msg "${MSG}"
 fi
 
+# Set up the ccache
+if [ ! -f "/mnt/ccache/ccache.conf" ]; then
+    cd $CIRCLE_WORKING_DIRECTORY
+    mkdir ccache
+    sudo mkdir /mnt/ccache
+    sudo mount --bind $CIRCLE_WORKING_DIRECTORY/ccache /mnt/ccache
+    echo 'export USE_CCACHE=1' >> $BASH_ENV
+    echo 'export CCACHE_DIR=/mnt/ccache' >> $BASH_ENV
+    echo 'export CCACHE_EXEC=$(which ccache)' >> $BASH_ENV
+    source $BASH_ENV
+    ccache -o compression=true
+    ccache -M 75G
+fi
+
 # Build the ROM
 echo "[*] Starting the build"
 echo "[*] Building ${device_codename}"
