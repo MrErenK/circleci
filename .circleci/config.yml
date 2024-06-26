@@ -28,7 +28,12 @@ jobs:
             git config --global user.email "$CIRCLE_USERNAME@users.noreply.github.com"
 
       - run:
-          name: Start the build
+          name: Export variables and start the build
           command: |
             cd $CIRCLE_WORKING_DIRECTORY
+            export should_skip_sync="0"
+            export clean_out="0"
+            export should_update_trees="0"
+            export should_update_kernel="0"
+            export installclean="0"
             bash build.sh
